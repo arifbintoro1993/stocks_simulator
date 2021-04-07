@@ -1,0 +1,1 @@
+class LancelotError < StandardError; end
