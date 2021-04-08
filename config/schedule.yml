@@ -1,0 +1,10 @@
+# config/schedule.yml
+add_stock_job:
+  cron: "*/1 * * * *" #it will retrieve data every 1 minute
+  class: "AddStockJob"
+  queue: default
+
+substract_stock_job:
+  cron: "*/2 * * * *" #it will retrive data every 2 minute
+  class: "SubtractStockJob"
+  queue: default

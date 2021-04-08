@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_07_060621) do
+ActiveRecord::Schema.define(version: 2021_04_07_112933) do
 
   create_table "locations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
@@ -26,6 +26,14 @@ ActiveRecord::Schema.define(version: 2021_04_07_060621) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "stock_transactions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "stock_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["stock_id"], name: "index_stock_transactions_on_stock_id"
+  end
+
   create_table "stocks", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "product_id", null: false
     t.bigint "location_id", null: false
@@ -36,6 +44,7 @@ ActiveRecord::Schema.define(version: 2021_04_07_060621) do
     t.index ["product_id"], name: "index_stocks_on_product_id"
   end
 
+  add_foreign_key "stock_transactions", "stocks"
   add_foreign_key "stocks", "locations"
   add_foreign_key "stocks", "products"
 end
